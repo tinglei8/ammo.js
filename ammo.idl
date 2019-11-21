@@ -48,6 +48,7 @@ interface btVector4 {
 };
 btVector4 implements btVector3;
 
+/*
 interface btQuadWord {
   float x();
   float y();
@@ -58,6 +59,7 @@ interface btQuadWord {
   void setZ(float z);
   void setW(float w);
 };
+*/
 
 interface btQuaternion {
   void btQuaternion(float x, float y, float z, float w);
@@ -81,13 +83,15 @@ interface btQuaternion {
   [Operator="*=", Ref] btQuaternion op_mulq([Ref] btQuaternion q);
   [Operator="/=", Ref] btQuaternion op_div(float s);
 };
-btQuaternion implements btQuadWord;
+// btQuaternion implements btQuadWord;
 
+/*
 interface btMatrix3x3 {
   void setEulerZYX(float ex, float ey, float ez);
   void getRotation([Ref] btQuaternion q);
   [Value] btVector3 getRow(long y);
 };
+*/
 
 interface btTransform {
   void btTransform();
@@ -98,7 +102,7 @@ interface btTransform {
   void setRotation([Ref] btQuaternion rotation);
   [Ref] btVector3 getOrigin();
   [Value] btQuaternion getRotation();
-  [Ref] btMatrix3x3 getBasis();
+  // [Ref] btMatrix3x3 getBasis();
   void setFromOpenGLMatrix(float[] m);
   [Value] btTransform inverse();
   [Operator="*=", Ref] btTransform op_mul([Ref] btTransform t);
@@ -109,11 +113,13 @@ interface btMotionState {
   void setWorldTransform([Ref] btTransform worldTrans);
 };
 
+/*
 interface btDefaultMotionState {
   void btDefaultMotionState([Ref] optional btTransform startTrans, [Ref] optional btTransform centerOfMassOffset);
   [Value] attribute btTransform m_graphicsWorldTrans;
 };
 btDefaultMotionState implements btMotionState;
+*/
 
 // Collision
 
@@ -148,12 +154,14 @@ interface btCollisionObject {
   [Const] btBroadphaseProxy getBroadphaseHandle();
 };
 
+/*
 [NoDelete]
 interface btCollisionObjectWrapper {
   [Const, Ref] btTransform getWorldTransform();
   [Const] btCollisionObject getCollisionObject();
   [Const] btCollisionShape getCollisionShape();
 };
+*/
 
 [Prefix="btCollisionWorld::"]
 interface RayResultCallback {
@@ -176,6 +184,7 @@ interface ClosestRayResultCallback {
 };
 ClosestRayResultCallback implements RayResultCallback;
 
+/*
 interface btConstCollisionObjectArray {
   long size();
   [Const] btCollisionObject at(long n);
@@ -185,17 +194,18 @@ interface btScalarArray {
   long size();
   float at(long n);
 };
+*/
 
 [Prefix="btCollisionWorld::"]
 interface AllHitsRayResultCallback {
   void AllHitsRayResultCallback([Const, Ref] btVector3 from, [Const, Ref] btVector3 to);
 
-  [Value] attribute btConstCollisionObjectArray m_collisionObjects;
+  // [Value] attribute btConstCollisionObjectArray m_collisionObjects;
   [Value] attribute btVector3 m_rayFromWorld;
   [Value] attribute btVector3 m_rayToWorld;
   [Value] attribute btVector3Array m_hitNormalWorld;
   [Value] attribute btVector3Array m_hitPointWorld;
-  [Value] attribute btScalarArray m_hitFractions;
+  // [Value] attribute btScalarArray m_hitFractions;
 };
 AllHitsRayResultCallback implements RayResultCallback;
 
@@ -214,6 +224,7 @@ interface btManifoldPoint {
   attribute any m_userPersistentData;
 };
 
+/*
 [Prefix="btCollisionWorld::"]
 interface ContactResultCallback {
   float addSingleResult([Ref] btManifoldPoint cp, [Const] btCollisionObjectWrapper colObj0Wrap, long partId0, long index0, [Const] btCollisionObjectWrapper colObj1Wrap, long partId1, long index1);
@@ -224,7 +235,9 @@ interface ConcreteContactResultCallback {
   void ConcreteContactResultCallback();
   float addSingleResult([Ref] btManifoldPoint cp, [Const] btCollisionObjectWrapper colObj0Wrap, long partId0, long index0, [Const] btCollisionObjectWrapper colObj1Wrap, long partId1, long index1);
 };
+*/
 
+/*
 [Prefix="btCollisionWorld::"]
 interface LocalShapeInfo {
     attribute long m_shapePart;
@@ -240,6 +253,7 @@ interface LocalConvexResult  {
   [Value] attribute btVector3 m_hitPointLocal;
   attribute float m_hitFraction;
 };
+*/
 
 [Prefix="btCollisionWorld::"]
 interface ConvexResultCallback {
@@ -273,10 +287,12 @@ interface btConvexShape {
 };
 btConvexShape implements btCollisionShape;
 
+/*
 interface btConvexTriangleMeshShape {
   void btConvexTriangleMeshShape(btStridingMeshInterface meshInterface, optional boolean calcAabb);
 };
 btConvexTriangleMeshShape implements btConvexShape;
+*/
 
 interface btBoxShape {
   void btBoxShape([Ref] btVector3 boxHalfExtents);
@@ -337,10 +353,12 @@ interface btSphereShape {
 };
 btSphereShape implements btCollisionShape;
 
+/*
 interface btMultiSphereShape {
   void btMultiSphereShape([Const] btVector3 positions, [Const] float[] radii, long numPoints);
 };
 btMultiSphereShape implements btCollisionShape;
+*/
 
 interface btConeShape {
   void btConeShape(float radius, float height);
@@ -362,14 +380,15 @@ interface btIntArray {
   long at(long n);
 };
 
-interface btFace {
-  [Value] attribute btIntArray m_indices;
-  attribute float[] m_plane;
-};
-
 interface btVector3Array {
   long size();
   [Const, Ref] btVector3 at(long n);
+};
+
+/*
+interface btFace {
+  [Value] attribute btIntArray m_indices;
+  attribute float[] m_plane;
 };
 
 interface btFaceArray {
@@ -400,6 +419,7 @@ interface btShapeHull {
   long numVertices();
   [Const] btVector3 getVertexPointer();
 };
+*/
 
 interface btCompoundShape {
   void btCompoundShape(optional boolean enableDynamicAabbTree);
@@ -414,6 +434,7 @@ interface btCompoundShape {
 };
 btCompoundShape implements btCollisionShape;
 
+/*
 interface btStridingMeshInterface {
   void setScaling([Const, Ref] btVector3 scaling);
 };
@@ -436,6 +457,7 @@ interface btTriangleMesh {
 };
 btTriangleMesh implements btStridingMeshInterface;
 
+
 enum PHY_ScalarType {
     "PHY_FLOAT",
     "PHY_DOUBLE",
@@ -448,17 +470,19 @@ enum PHY_ScalarType {
 interface btConcaveShape {
 };
 btConcaveShape implements btCollisionShape;
+*/
 
 interface btEmptyShape {
   void btEmptyShape();
 };
-btEmptyShape implements btConcaveShape;
+// btEmptyShape implements btConcaveShape;
 
 interface btStaticPlaneShape {
   void btStaticPlaneShape([Const, Ref] btVector3 planeNormal, float planeConstant);
 };
-btStaticPlaneShape implements btConcaveShape;
+// btStaticPlaneShape implements btConcaveShape;
 
+/*
 interface btTriangleMeshShape {
 };
 btTriangleMeshShape implements btConcaveShape;
@@ -482,6 +506,7 @@ interface btDefaultCollisionConstructionInfo {
 interface btDefaultCollisionConfiguration {
   void btDefaultCollisionConfiguration([Ref] optional btDefaultCollisionConstructionInfo info);
 };
+*/
 
 interface btPersistentManifold {
   void btPersistentManifold();
@@ -509,9 +534,11 @@ interface btOverlappingPairCache {
   [Const] float getNumOverlappingPairs();
 };
 
+/*
 interface btAxisSweep3 {
   void btAxisSweep3([Ref] btVector3 worldAabbMin, [Ref] btVector3 worldAabbMax, optional long maxHandles, optional btOverlappingPairCache pairCache, optional boolean disableRaycastAccelerator);
 };
+*/
 
 interface btBroadphaseInterface {
   btOverlappingPairCache getOverlappingPairCache();
@@ -587,12 +614,14 @@ interface btRigidBody {
 };
 btRigidBody implements btCollisionObject;
 
+/*
 interface btConstraintSetting {
   void btConstraintSetting();
   attribute float m_tau;
   attribute float m_damping;
   attribute float m_impulseClamp;
 };
+*/
 
 interface btTypedConstraint {
   void enableFeedback(boolean needsFeedback);
@@ -602,6 +631,7 @@ interface btTypedConstraint {
   void setParam(long num, float value, long axis);
 };
 
+/*
 enum btConstraintParams {
   "BT_CONSTRAINT_ERP",
   "BT_CONSTRAINT_STOP_ERP",
@@ -647,6 +677,7 @@ btGeneric6DofSpringConstraint implements btGeneric6DofConstraint;
 interface btSequentialImpulseConstraintSolver {
   void btSequentialImpulseConstraintSolver();
 };
+*/
 
 interface btConeTwistConstraint {
   void btConeTwistConstraint([Ref] btRigidBody rbA, [Ref] btRigidBody rbB, [Ref] btTransform rbAFrame, [Ref] btTransform rbBFrame);
@@ -663,6 +694,7 @@ interface btConeTwistConstraint {
 };
 btConeTwistConstraint implements btTypedConstraint;
 
+/*
 interface btHingeConstraint {
   void btHingeConstraint ([Ref] btRigidBody rbA, [Ref] btRigidBody rbB, [Ref] btVector3 pivotInA, [Ref] btVector3 pivotInB, [Ref] btVector3 axisInA, [Ref] btVector3 axisInB, optional boolean useReferenceFrameA);
   //void btHingeConstraint ([Ref] btRigidBody rbA, [Ref] btVector3 pivotInA, [Ref] btVector3 axisInA, optional boolean useReferenceFrameA);
@@ -697,6 +729,7 @@ btFixedConstraint implements btTypedConstraint;
 
 interface btConstraintSolver {
 };
+*/
 
 interface btDispatcherInfo {
   attribute float m_timeStep;
@@ -721,8 +754,8 @@ interface btCollisionWorld {
   void removeCollisionObject(btCollisionObject collisionObject);
   [Const] btBroadphaseInterface getBroadphase ();
   void convexSweepTest([Const] btConvexShape castShape, [Const, Ref] btTransform from, [Const, Ref] btTransform to, [Ref] ConvexResultCallback resultCallback, float allowedCcdPenetration);
-  void contactPairTest(btCollisionObject colObjA, btCollisionObject colObjB, [Ref] ContactResultCallback resultCallback);
-  void contactTest(btCollisionObject colObj, [Ref] ContactResultCallback resultCallback);
+  // void contactPairTest(btCollisionObject colObjA, btCollisionObject colObjB, [Ref] ContactResultCallback resultCallback);
+  // void contactTest(btCollisionObject colObj, [Ref] ContactResultCallback resultCallback);
   void updateSingleAabb(btCollisionObject colObj);
   void setDebugDrawer(btIDebugDraw debugDrawer);
   btIDebugDraw getDebugDrawer();
@@ -765,6 +798,7 @@ interface btDiscreteDynamicsWorld {
 };
 btDiscreteDynamicsWorld implements btDynamicsWorld;
 
+/*
 [Prefix="btRaycastVehicle::", NoDelete]
 interface btVehicleTuning {
   void btVehicleTuning();
@@ -848,7 +882,9 @@ interface btWheelInfo {
   attribute float  m_suspensionRelativeVelocity;
   attribute float  m_skidInfo;
 };
+*/
 
+/*
 interface btActionInterface {
     void updateAction (btCollisionWorld collisionWorld, float deltaTimeStep);
 };
@@ -927,10 +963,11 @@ btPairCachingGhostObject implements btGhostObject;
 interface btGhostPairCallback {
   void btGhostPairCallback();
 };
-
+*/
 
 // soft bodies
 
+/*
 interface btSoftBodyWorldInfo {
   void btSoftBodyWorldInfo();
   attribute float air_density;
@@ -980,7 +1017,7 @@ interface Anchor {
   [Value] attribute btVector3 m_local;
   attribute btRigidBody m_body;
   attribute float m_influence;
-  [Value] attribute btMatrix3x3 m_c0;
+  // [Value] attribute btMatrix3x3 m_c0;
   [Value] attribute btVector3 m_c1;
   attribute float m_c2;
 };
@@ -1095,3 +1132,4 @@ interface btSoftBodyHelpers {
   btSoftBody CreateFromTriMesh([Ref] btSoftBodyWorldInfo worldInfo, float[] vertices, long[] triangles, long ntriangles, boolean randomizeConstraints);
   btSoftBody CreateFromConvexHull([Ref] btSoftBodyWorldInfo worldInfo, [Const] btVector3 vertices, long nvertices, boolean randomizeConstraints);
 };
+*/

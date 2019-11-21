@@ -1,3 +1,13 @@
 bullet/build
+bullet/aclocal.m4
+bullet/autom4te.cache/
+bullet/compile
+bullet/config.guess
+bullet/config.sub
+bullet/configure
+bullet/depcomp
+bullet/ltmain.sh
+bullet/missing
 *.diff
+Makefile.in
 

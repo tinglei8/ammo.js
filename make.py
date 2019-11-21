@@ -20,6 +20,8 @@ os.path.join('BulletSoftBody', 'btSoftBodyHelpers.h'),
 
 os.path.join('..', '..', 'idl_templates.h')]
 
+exec(open(os.path.expanduser('~/.emscripten'), 'r').read())
+
 # Startup
 
 stage_counter = 0
@@ -32,10 +34,10 @@ def which(program):
   return None
 
 def build():
-  EMSCRIPTEN_ROOT = os.environ.get('EMSCRIPTEN')
-  if not EMSCRIPTEN_ROOT:
-    emcc = which('emcc')
-    EMSCRIPTEN_ROOT = os.path.dirname(emcc)
+  #EMSCRIPTEN_ROOT = os.environ.get('EMSCRIPTEN')
+  #if not EMSCRIPTEN_ROOT:
+  #  emcc = which('emcc')
+  #  EMSCRIPTEN_ROOT = os.path.dirname(emcc)
 
   if not EMSCRIPTEN_ROOT:
     print "ERROR: EMSCRIPTEN_ROOT environment variable (which should be equal to emscripten's root dir) not found"

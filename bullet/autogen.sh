@@ -15,7 +15,7 @@ rc=$?
 
 if test $rc -eq 0; then
 	echo "running libtool"
-	libtoolize --force --automake --copy
+	glibtoolize --force --automake --copy
 	rc=$?
 else
 	echo "An error occured, autogen.sh stopping."
