@@ -498,6 +498,7 @@ interface btHeightfieldTerrainShape {
     float getMargin();
 };
 btHeightfieldTerrainShape implements btConcaveShape;
+*/
 
 interface btDefaultCollisionConstructionInfo {
   void btDefaultCollisionConstructionInfo();
@@ -506,7 +507,6 @@ interface btDefaultCollisionConstructionInfo {
 interface btDefaultCollisionConfiguration {
   void btDefaultCollisionConfiguration([Ref] optional btDefaultCollisionConstructionInfo info);
 };
-*/
 
 interface btPersistentManifold {
   void btPersistentManifold();
@@ -726,10 +726,10 @@ interface btFixedConstraint {
   void btFixedConstraint([Ref] btRigidBody rbA, [Ref] btRigidBody rbB, [Const,Ref] btTransform frameInA, [Const,Ref] btTransform frameInB);
 };
 btFixedConstraint implements btTypedConstraint;
+*/
 
 interface btConstraintSolver {
 };
-*/
 
 interface btDispatcherInfo {
   attribute float m_timeStep;
@@ -884,11 +884,11 @@ interface btWheelInfo {
 };
 */
 
-/*
 interface btActionInterface {
     void updateAction (btCollisionWorld collisionWorld, float deltaTimeStep);
 };
 
+/*
 interface btKinematicCharacterController {
   void btKinematicCharacterController(btPairCachingGhostObject ghostObject, btConvexShape convexShape, float stepHeight, optional long upAxis);
 
