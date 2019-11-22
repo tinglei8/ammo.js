@@ -8,6 +8,7 @@ bullet/configure
 bullet/depcomp
 bullet/ltmain.sh
 bullet/missing
+builds/t.js
 *.diff
 Makefile.in
 
