@@ -61,7 +61,7 @@ def build():
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
 
-  args = '-O3 --llvm-lto 1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+  args = '-O3 --llvm-lto 1 --memory-init-file 0 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if not wasm:
@@ -76,15 +76,15 @@ def build():
   emcc_args = args.split(' ')
 
   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)] # default 64MB. Compile with ALLOW_MEMORY_GROWTH if you want a growable heap (slower though).
-  #emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
+  # emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
 
-  emcc_args += '-s EXPORT_NAME="Ammo" -s MODULARIZE=1'.split(' ')
+  emcc_args += '-s ENVIRONMENT=web -s EXPORT_NAME="Physics3D" -s MODULARIZE_INSTANCE=1'.split(' ')
 
-  target = 'ammo.js' if not wasm else 'ammo.wasm.js'
+  target = 'laya.physics3D.js' if not wasm else 'laya.physics3D.wasm.js'
 
   print
   print '--------------------------------------------------'
-  print 'Building ammo.js, build type:', emcc_args
+  print 'Building laya.physics3D.js, build type:', emcc_args
   print '--------------------------------------------------'
   print
 
@@ -184,7 +184,7 @@ def build():
     stage('wrap')
 
     wrapped = '''
-  // This is ammo.js, a port of Bullet Physics to JavaScript. zlib licensed.
+  // This is laya.physics3D.js, a port of Bullet Physics to JavaScript. zlib licensed.
   ''' + open(temp).read()
 
     open(temp, 'w').write(wrapped)

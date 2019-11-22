@@ -193,3 +193,19 @@ Upstream Version
 ================
 
 Bullet 2.82 patched with [raycast fix from 2.83](https://github.com/bulletphysics/bullet3/commit/7151865c16ba996996206e1fd7869cbb1e7edd8d)
+
+Mac Build说明
+================
+
+Mac上Build可能会碰到一些问题，解决方法如下：
+
+  * 先安装依赖，如果已经安装则升级到最新版本：brew install llvm emscripten
+
+  * 运行build.sh，如果autogen的libtool出错，把libtool改成用glibtool
+
+  * 如果make.py在configure时出错，可能是binaryen编译失败，手动进入binaryen的文件夹执行build脚本即可
+
+  * 修改ammo.idl，可以选择包括哪些代码进build，进而控制编译后js的大小
+
+  * 不需要安装docker依赖，直接用Mac Build即可成功
+
